@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Speech to Text";
+}
+
+<h2>Speech to Text</h2>
+
+<div>
+    <button id="startRecording">Start Recording</button>
+    <p id="transcriptionResult">Your transcription will appear here.</p>
+</div>
+
+<script>
+    document.getElementById('startRecording').addEventListener('click', async () => {
+        const response = await fetch('/Home/TranscribeAudio', {
+            method: 'POST',
+        });
+
+        const data = await response.json();
+        document.getElementById('transcriptionResult').innerText = data.recognizedText;
+        
+    });
+</script>
